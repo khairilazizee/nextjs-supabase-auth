@@ -11,6 +11,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         async function fetchUser() {
@@ -32,6 +33,10 @@ const LoginPage = () => {
                 emailRedirectTo: `${location.origin}/auth/callback`
             }
         })
+        // console.log(res.data.user)
+        if (res.data.user === null) {
+            setError(true)
+        }
         setUser(res.data.user)
         router.refresh();
         setEmail('')
@@ -43,6 +48,7 @@ const LoginPage = () => {
             email,
             password
         })
+        // console.log(res.data)
         setUser(res.data.user)
         router.refresh()
         setEmail('')
@@ -74,8 +80,11 @@ const LoginPage = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-center items-center bg-black">
-                <main className="h-screen flex flex-col items-center justify-center bg-black p-6">
+            <div className="flex flex-col justify-center items-center bg-black h-screen">
+                {error && (
+                    <div className="bg-red-600 text-white text-center px-4 py-3">User already exists</div>
+                )}
+                <main className="flex flex-col items-center justify-center bg-black p-6">
                     <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mb-4 w-full p-3 rounded-md border border-gray-7-- bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" autoComplete="off" placeholder="email@domain.com" />
                     <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mb-4 w-full p-3 rounded-md border border-gray-7-- bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                     <div className="gap-5 justify-between flex">

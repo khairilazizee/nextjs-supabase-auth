@@ -18,7 +18,7 @@ export default async function Home() {
 
       <main className="flex min-h-screen flex-col items-center p-24">
         <div className="z-10 max-w-5xl w-full items-center font-mono text-sm lg:flex">
-          Your are not logged in. Click <Link href="/login">here</Link> to log in.
+          Your are not logged in. <Link href="/login" className="underline">Login</Link>.
         </div>
       </main>
     )

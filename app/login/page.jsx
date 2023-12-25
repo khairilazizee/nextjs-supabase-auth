@@ -38,7 +38,8 @@ const LoginPage = () => {
             setError(true)
         }
         setUser(res.data.user)
-        router.refresh();
+        // router.refresh();
+        router.push("/dashboard")
         setEmail('')
         setPassword('')
     }
@@ -50,7 +51,8 @@ const LoginPage = () => {
         })
         // console.log(res.data)
         setUser(res.data.user)
-        router.refresh()
+        // router.refresh()
+        router.push("/dashboard")
         setEmail('')
         setPassword('')
     }
